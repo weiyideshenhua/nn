@@ -74,7 +74,7 @@ def conv2d(x, W, padding='SAME', strides=[1, 1, 1, 1]):
     if not tf.is_tensor(x):
         x = tf.convert_to_tensor(x)
     
-    # 验证padding参数
+    # 验证padding参数, 如果 padding 无效，抛出 ValueError 异常并提供详细信息
     if padding not in ['SAME', 'VALID']:
         raise ValueError(f"Invalid padding value: {padding}. Must be 'SAME' or 'VALID'.")
     
@@ -90,7 +90,6 @@ def conv2d(x, W, padding='SAME', strides=[1, 1, 1, 1]):
 def max_pool_2x2(x):
     # 滑动步长是 2步; 池化窗口的尺度 高和宽度都是2; padding 方式 请选择 same
     # 提示 使用函数  tf.nn.max_pool
-    
     return tf.nn.max_pool(x, ksize=[1, 2, 2, 1], strides=[1, 2, 2, 1], padding='SAME')
 
 # define placeholder for inputs to network
