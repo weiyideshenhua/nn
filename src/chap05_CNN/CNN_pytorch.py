@@ -5,11 +5,11 @@
 import os
 import torch
 import torch.nn as nn
-from torch.autograd import Variable
 import torch.utils.data as Data
 import torchvision  # 包含常用的数据集和模型
 import torch.nn.functional as F  # 包含常用的函数式API，如ReLU, softmax等
 import numpy as np
+from torch.autograd import Variable
 
 # 设置超参数
 learning_rate = 1e-4  #  学习率
@@ -55,8 +55,8 @@ class CNN(nn.Module):
         
         # 第一个卷积层
         self.conv1 = nn.Sequential(
-            # 卷积层：1个输入通道，32个输出通道，7x7的卷积核
-            # stride=1表示步长为1，padding=3表示边缘填充3层（保持尺寸不变）
+            # 卷积层：输入通道为1，输出通道为32，卷积核大小为7x7
+            # stride=1：步长为1，padding=3：边缘填充3层（保持图像尺寸不变）
             nn.Conv2d(in_channels=1, out_channels=32, kernel_size=7, stride=1, padding=3),
             nn.ReLU(),  # ReLU激活函数
             nn.MaxPool2d(2)  # 2x2的最大池化，尺寸减半
