@@ -141,7 +141,7 @@ print("第十八题：\n")
 print("x.dot(y)\n", x.dot(y))  # 使用dot方法进行矩阵乘法
 print("np.dot(x,y)\n", np.dot(x, y))  # 使用np.dot函数进行矩阵乘法
 
-# 19.利用13题目中的 x,进行求和。提示：输出三种求和 (1)print(np.sum(x)):   (2)print(np.sum(x，axis =0 ));   (3)print(np.sum(x,axis = 1))
+# 19.利用13题目中的 x,进行求和。提示：输出三种求和 (1)print(np.sum(x)):   (2)print(np.sum(x,axis =0 ));   (3)print(np.sum(x,axis = 1))
 print("第十九题：\n")
 
 print("print(np.sum(x)):", np.sum(x))  # 所有元素求和
@@ -166,7 +166,7 @@ print("第二十二题：\n")
 print("e的指数：np.exp(x)")  
 print(np.exp(x))
 
-# 23.利用13题目中的 x,求值最大的下标（提示(1)print(np.argmax(x)) ,(2) print(np.argmax(x, axis =0))(3)print(np.argmax(x),axis =1))
+# 23.利用13题目中的 x,求值最大的下标（提示(1)print(np.argmax(x)) ,(2) print(np.argmax(x, axis =0))(3)print(np.argmax(x,axis =1))
 print("第二十三题：\n")
 print("全局最大值的下标:", np.argmax(x))# 打印整个数组 x 中最大值的下标
 print("每列最大值的下标:", np.argmax(x, axis=0))# 打印数组 x 沿着第 0 轴（通常是行方向）上每一列最大值的下标
