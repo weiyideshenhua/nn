@@ -1,8 +1,8 @@
-import torch.nn as nn
 import torch
-from torch.autograd import Variable
+import torch.nn as nn
 import torch.nn.functional as F
 import numpy as np
+from torch.autograd import Variable
 
 #对神经网络中的线性层（Linear）进行权重初始化
 def weights_init(m):
@@ -62,6 +62,29 @@ class RNN_model(nn.Module):
         # 定义log softmax激活函数作为输出层
         self.softmax = nn.LogSoftmax(dim=1)  # 明确指定维度，避免警告
 
+    def weights_init(self, m):
+        '''
+        增加了权重初始化函数，采用了 Xavier 初始化方法，通常对LSTM等RNN网络有效。
+        适用于Sigmoid或tanh等激活函数的网络。Xavier初始化可以保持前向传播中的方差平衡，有助于训练稳定性。
+        '''
+        if isinstance(m, nn.Linear):
+            nn.init.xavier_uniform_(m.weight)  # 使用Xavier初始化方法初始化全连接层的权重
+            if m.bias is not None:
+                nn.init.constant_(m.bias, 0)  # 偏置初始化为0
+        elif isinstance(m, nn.LSTM):
+            # 对LSTM的权重进行初始化（如果需要）
+            for name, param in m.named_parameters():
+                if 'weight' in name:
+                    nn.init.xavier_uniform_(param)  # Xavier初始化LSTM权重
+                elif 'bias' in name:
+                    nn.init.constant_(param, 0)  # 偏置初始化为0
+          '''
+           if isinstance(m, nn.Linear) or isinstance(m, nn.LSTM):
+            nn.init.xavier_uniform_(m.weight)  # 使用Xavier均匀分布初始化
+            if m.bias is not None:
+                nn.init.zeros_(m.bias)  # 偏置初始化为0
+          '''
+        
     def forward(self, sentence, is_test=False):
         # 查找词向量并调整形状为 (1, 序列长度, 嵌入维度)
         batch_input = self.word_embedding_lookup(sentence).view(1, -1, self.word_embedding_dim)
