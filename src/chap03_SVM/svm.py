@@ -48,15 +48,20 @@ class SVM:
         self.b = 0                # 偏置初始化为0
 
         for epoch in range(self.max_iter):
-            # 计算函数间隔
+            #计算每个样本的间隔：间隔计算公式为 y_i * (w^T * x_i + b)
+            # 其中,y_i 为标签,w^T * x_i + b 为样本 x_i 对应的预测得分
             margin = y * (np.dot(X, self.w) + self.b)
-            # 找出违反间隔条件的样本（margin < 1）
+            # 找出违反间隔条件的样本（margin < 1 ): 当样本的 margin < 1 时，该样本被认为是错误分类或处于间隔区域内
             idx = np.where(margin < 1)[0]
 
+            # 如果没有违反间隔条件的样本，则跳过梯度更新：这意味着所有样本都满足 margin >= 1，模型已经达到一个相对稳定的状态
+            if len(idx) == 0:
+                continue
+        
             # 计算梯度
             # L2正则化项 + 错误分类样本的平均梯度
             dw = (2 * self.reg_lambda * self.w) - np.mean(y[idx].reshape(-1, 1) * X[idx], axis=0)
-            db = -np.mean(y[idx])
+            db = -np.mean(y[idx]) # 对偏置项的梯度计算，公式为 -1/m * Σ (y_i)
 
             # 参数更新
             self.w -= self.learning_rate * dw
