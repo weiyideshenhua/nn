@@ -184,11 +184,11 @@ print("x 转置后的结果:\n", x.T)
 
 # 22. 利用 13 题目中的 x, 求 e 的指数（提示： 函数 np.exp()）
 print("第二十二题：\n")
+# x = np.array([[1, 2], [3, 4]], dtype=np.float64)  
+# 计算 e 的 x 次方，即对 x 数组中的每个元素应用指数函数
+print("e 的指数：   np.exp(x)\n", np.exp(x))
 
-print("e 的指数：np.exp(x)")  
-print(np.exp(x))
-
-# 23. 利用 13 题目中的 x, 求值最大的下标（提示 (1)print(np.argmax(x)) ,(2) print(np.argmax(x, axis =0))(3)print(np.argmax(x),axis =1))
+# 23. 利用 13 题目中的 x, 求值最大的下标（提示 (1)print(np.argmax(x)) ,(2) print(np.argmax(x, axis =0))(3)print(np.argmax(x,axis =1))
 print("第二十三题：\n")
 print("全局最大值的下标:", np.argmax(x))  # 打印整个数组 x 中最大值的下标
 print("每列最大值的下标:", np.argmax(x, axis=0))  # 打印数组 x 沿着第 0 轴（通常是行方向）上每一列最大值的下标
@@ -235,8 +235,10 @@ plt.ylabel("y")  # 设置图像中 y 轴的标签为 "y"
 # 添加网格线
 plt.grid(True)
 
-# 显示图例
+# 显示图例, legend() 用于显示图例，方便标注不同的线条、点等
 plt.legend()
+# 自动调整子图参数，使图像更紧凑、避免标签重叠
+# tight_layout() 会调整图像的布局，确保所有的标签和标题都能显示完整
 plt.tight_layout()
 
 # 显示图像
